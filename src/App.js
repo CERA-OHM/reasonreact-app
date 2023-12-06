@@ -1,23 +1,32 @@
-import logo from './logo.svg';
+/* App.js */
+
+import React from 'react';
 import './App.css';
 
+// Import ReasonReact components
+import Header from './Header.re';
+import Square from './Square.re';
+
+
+
 function App() {
+  const name = "Patcharachai Ludla";
+  
+  // Generate 9 random colors
+  const generateRandomColor = () => {
+    return `#${Math.floor(Math.random()*16777215).toString(16)}`;
+  };
+
+  const colors = Array.from({ length: 9 }, () => generateRandomColor());
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header name={name} />
+      <div className="square-container">
+        {colors.map((color, index) => (
+          <Square key={index} color={color} />
+        ))}
+      </div>
     </div>
   );
 }
